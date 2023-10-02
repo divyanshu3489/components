@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
-import Entypo from "react-native-vector-icons/Entypo";
-import crossImg from "../assets/cross.png";
-import { Data } from "./buttonsData";
+import crossImg from "../../assets/cross.png";
 
-export const SwitchFilter =()=>{
+export const SwitchFilter =(props)=>{
+    
+    //Props
+    const Data = props.data;
+
+    //Local States
     const [selectedItem, setSelectedItem] = useState(null);
     const [buttonsData, setButtonsData] = useState(Data);
 
@@ -28,7 +31,6 @@ export const SwitchFilter =()=>{
             >
                 <Text style={styles.buttonText}>{selectedItem.name}</Text>
                 <Image source={crossImg} style={styles.crossImage}/>
-                {/* <Entypo name="cross" size={20} color={"#054c99"}/> */}
             </TouchableOpacity>
         }
             <ScrollView 

@@ -7,9 +7,19 @@ export const Home =()=>{
     return(
         <View style={styles.container}>
             <ButtonComponent
-                headerTitle = {'1.SwitchFilter by IMDb'}
+                headerTitle = {'1.Switch Filter by IMDb'}
                 buttonText = {'Switch Filter'}
                 navigateTo = {'SwitchFilter'}
+            />
+            <ButtonComponent
+                headerTitle = {'2.Button Switch'}
+                buttonText = {'Button Switch'}
+                navigateTo = {'ButtonSwitch'}
+            />
+            <ButtonComponent
+                headerTitle = {'3.Accordion'}
+                buttonText = {'Accordion'}
+                navigateTo = {'Accordion'}
             />
         </View>
     );
