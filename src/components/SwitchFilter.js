@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View,Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View,Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import Entypo from "react-native-vector-icons/Entypo";
+import crossImg from "../assets/cross.png";
 import { Data } from "./buttonsData";
 
 export const SwitchFilter =()=>{
@@ -26,7 +27,8 @@ export const SwitchFilter =()=>{
                 }}
             >
                 <Text style={styles.buttonText}>{selectedItem.name}</Text>
-                <Entypo name="cross" size={20} color={"#054c99"}/>
+                <Image source={crossImg} style={styles.crossImage}/>
+                {/* <Entypo name="cross" size={20} color={"#054c99"}/> */}
             </TouchableOpacity>
         }
             <ScrollView 
@@ -107,5 +109,10 @@ const styles = StyleSheet.create({
         borderWidth:2,
         borderColor:'"#054c99',//"#222222",//"#1685ff",
         borderRadius:15
+    },
+    crossImage:{
+        width:10,
+        height:10,
+        tintColor: '#1685ff',
     }
 })
