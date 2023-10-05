@@ -21,6 +21,11 @@ export const Home =()=>{
                 buttonText = {'Accordion'}
                 navigateTo = {'Accordion'}
             />
+            <ButtonComponent
+                headerTitle = {'4.Dropdowns'}
+                buttonText = {'Dropdowns'}
+                navigateTo = {'Dropdown'}
+            />
         </View>
     );
 }

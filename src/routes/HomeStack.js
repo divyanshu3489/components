@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { SwitchFilterScreen } from "../screens/Home/ComponentsScreens/SwitchFilter";
 import { ButtonSwitchScreen } from "../screens/Home/ComponentsScreens/ButtonFilter";
 import { AccordionScreen } from "../screens/Home/ComponentsScreens/AccordionScreen";
+import { DropdownScreen } from "../screens/Home/ComponentsScreens/DropdownScreen";
 import { Home } from "../screens/Home/Home";
 
 const HomeStack =()=>{
@@ -27,6 +28,11 @@ const HomeStack =()=>{
                 name="Accordion" 
                 component={AccordionScreen}
                 options={{headerTitle:'Accordion'}}
+            />
+            <Stack.Screen 
+                name="Dropdown" 
+                component={DropdownScreen}
+                options={{headerTitle:'Dropdowns'}}
             />
         </Stack.Navigator>
     );
