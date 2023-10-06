@@ -8,18 +8,19 @@ export const ButtonComponent =(props)=>{
     const headerTitle = props.headerTitle;
     const buttonText = props.buttonText;
     const navigateTo = props.navigateTo;
+    const buttonStyles = props.buttonStyles;
 
     //Navigation
     const navigation = useNavigation();
 
     return(
         <View style={styles.buttonContainer}>
-            <Text>{headerTitle}</Text>
+            {/* <Text>{headerTitle}</Text> */}
             <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, buttonStyles['viewStyle']]}
                 onPress={()=>navigation.navigate(navigateTo)}
             >
-                <Text style={styles.buttonText}>{buttonText}</Text>
+                <Text style={[styles.buttonText, buttonStyles['textStyle']]}>{buttonText}</Text>
             </TouchableOpacity>
         </View>
     )
@@ -31,15 +32,17 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     button:{
-        width:200,
-        height:30,
+        width:230,
+        height:80,
         marginVertical:5,
-        borderRadius:15,
+        borderRadius:30,
         backgroundColor:"#008080",
         alignItems:"center",
         justifyContent:"center"
     },
     buttonText:{
-        color:"#ffffff"
+        color:"#ffffff",
+        fontSize:30,
+        fontWeight:'600'
     }
 })
