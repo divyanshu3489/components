@@ -67,7 +67,7 @@ const SingleAccordion = memo((props)=>{
             >
                 <Text style={[styles.accordianHeader, customStyles.headerText]}>{value.header}</Text>
                 <Animated.View style={{transform:[{rotate}]}}> 
-                    <MaterialIcons name="keyboard-arrow-left" color={"black"} size={25}/>
+                    <MaterialIcons name="keyboard-arrow-left" color={customStyles.headerText.color} size={25}/>
                 </Animated.View>
             </TouchableOpacity>
             {isOpen ?

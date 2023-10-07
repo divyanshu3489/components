@@ -9,15 +9,15 @@ export const Home =()=>{
             {/* <View style={styles.container}> */}
                 <Text style={styles.headingText}>COMPONENTS {`>>>>`}</Text>
                 <ButtonComponent
-                    //headerTitle = {'1.Switch Filter by IMDb'}
-                    buttonText = {'Switch Filter'}
-                    navigateTo = {'SwitchFilter'}
+                    //headerTitle = {'1.Scroll Filter by IMDb'}
+                    buttonText = {'Scroll Filter'}
+                    navigateTo = {'ScrollFilter'}
                     buttonStyles = {{'viewStyle':{backgroundColor:'#322e2f'}, 'textStyle':{color:'#fafafa'}}}
                 />
                 <ButtonComponent
-                    //headerTitle = {'2.Button Switch'}
-                    buttonText = {'Button Switch'}
-                    navigateTo = {'ButtonSwitch'}
+                    //headerTitle = {'2.Switch Filter'}
+                    buttonText = {'Switch Filter'}
+                    navigateTo = {'SwitchFilter'}
                     buttonStyles = {{'viewStyle':{backgroundColor:'#12a4d9'}, 'textStyle':{color:'#fafafa'}}}
                 />
                 <ButtonComponent

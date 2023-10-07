@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View,Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import crossImg from "../../assets/cross.png";
 
-export const SwitchFilter =(props)=>{
+export const ScrollFilter =(props)=>{
     
     //Props
     const Data = props.data;
@@ -18,23 +18,23 @@ export const SwitchFilter =(props)=>{
     }
 
     return(
-        <View style={{flexDirection:"row"}}>
-        {
-            !selectedItem ? null : 
-            <TouchableOpacity
-                activeOpacity={0.8}
-                style={styles.selectedItem}
-                onPress={()=>{
-                    setSelectedItem(null);
-                    setButtonsData(Data);
-                }}
-            >
-                <Text style={styles.buttonText}>{selectedItem.name}</Text>
-                <Image source={crossImg} style={styles.crossImage}/>
-            </TouchableOpacity>
-        }
+        <View style={styles.container}>
+            {
+                !selectedItem ? null : 
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles.selectedItem}
+                    onPress={()=>{
+                        setSelectedItem(null);
+                        setButtonsData(Data);
+                    }}
+                >
+                    <Text style={styles.buttonText}>{selectedItem.name}</Text>
+                    <Image source={crossImg} style={styles.crossImage}/>
+                </TouchableOpacity>
+            }
             <ScrollView 
-                contentContainerStyle={{alignItems:"center", paddingHorizontal:10}}
+                contentContainerStyle={styles.scrollViewContainer}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
             >
@@ -77,44 +77,49 @@ const SingleButton=({lastIndex, button, index, selectedItem, selectedIndex})=>{
 }
 
 const styles = StyleSheet.create({
+    container:{
+        flexDirection:"row"
+    },
+    scrollViewContainer:{
+        flex:1,
+        justifyContent:"center"
+    },
     buttonContainer:{
         flexDirection:"row",
-        justifyContent:"space-between",
-        height:30,
+        height:40,
         paddingHorizontal:10,
-        borderWidth:2,
+        borderWidth:1,
         borderColor:"#054c99",
-        borderRadius:15
+        borderRadius:20
     },
     button:{
         justifyContent:"center"
     },
     buttonText:{
-        fontSize:15,
-        //paddingBottom:3,
+        fontSize:18,
         color:"#1685ff",
         paddingHorizontal:5
     },
     buttonSeparator:{
-        width:2,
+        width:1,
         backgroundColor:"#054c99"//"#222222"
     },
     selectedItem:{
         flexDirection:"row",
-        height:30,
+        height:40,
         //width:200,
         marginHorizontal:10,
         paddingHorizontal:5,
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:"#1687FF22",
-        borderWidth:2,
+        borderWidth:1,
         borderColor:'"#054c99',//"#222222",//"#1685ff",
-        borderRadius:15
+        borderRadius:20
     },
     crossImage:{
-        width:10,
-        height:10,
+        width:13,
+        height:13,
         tintColor: '#1685ff',
     }
 })

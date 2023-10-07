@@ -1,17 +1,18 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { primaryFontColor, secondaryFontColor } from "../../appStyles/fontStyles";
+import color from "../../appStyles/colorStyle";
 
-export const CustomSwitch=(props)=>{
+export const SwitchFilter=(props)=>{
 
     //Props
     const data = props.data;
-    const switchContainer = props.switchContainer;
-    const selectionColor = props.selectionColor;
     const switchItem = props.switchItem;
+    const switchContainer = props.switchContainer;
+    const switchTextStyle = props.switchTextStyle;
+    const selectionColor = props.selectionColor;
     const selectedItem = props.selectedItem;
     const selectedItemColor = props.selectedItemColor;
-    const switchTextStyle = props.switchTextStyle;
 
     //Selected item
     const itemClicked = (item, selectedIndex)=>{
@@ -33,7 +34,7 @@ export const CustomSwitch=(props)=>{
                         <TouchableOpacity key={index}
                             style={[
                                 styles.switchButton, switchItem,
-                                {backgroundColor:item && item.selected? selectionColor:"#fafafa"}
+                                {backgroundColor:item && item.selected? selectionColor:color.appBgColor}
                             ]}
                             activeOpacity={0.7}
                             disabled={item && item.selected? true:false}
@@ -54,8 +55,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"space-around",
         marginVertical:20,
-        padding:2,
-        //borderWidth:1
+        padding:2
     },
     switchButton:{
         flex:1,

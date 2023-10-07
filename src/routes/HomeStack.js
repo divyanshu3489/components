@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { ScrollFilterScreen } from "../screens/Home/ComponentsScreens/ScrollFilter";
 import { SwitchFilterScreen } from "../screens/Home/ComponentsScreens/SwitchFilter";
-import { ButtonSwitchScreen } from "../screens/Home/ComponentsScreens/ButtonFilter";
 import { AccordionScreen } from "../screens/Home/ComponentsScreens/AccordionScreen";
 import { DropdownScreen } from "../screens/Home/ComponentsScreens/DropdownScreen";
 import { Home } from "../screens/Home/Home";
@@ -15,14 +15,14 @@ const HomeStack =()=>{
                 component={Home}
             />
             <Stack.Screen 
+                name="ScrollFilter" 
+                component={ScrollFilterScreen}
+                options={{headerTitle:'Scroll Filter'}}
+            />
+            <Stack.Screen 
                 name="SwitchFilter" 
                 component={SwitchFilterScreen}
                 options={{headerTitle:'Switch Filter'}}
-            />
-            <Stack.Screen 
-                name="ButtonSwitch" 
-                component={ButtonSwitchScreen}
-                options={{headerTitle:'Button Switch'}}
             />
             <Stack.Screen 
                 name="Accordion" 
