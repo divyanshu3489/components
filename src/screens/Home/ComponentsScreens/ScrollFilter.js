@@ -8,7 +8,14 @@ export const ScrollFilterScreen =()=>{
     return(
         <View style={styles.container}>
             <Text style={styles.headingText}>SCROLL FILTER</Text>
-            <ScrollFilter data = {Data}/>
+            <ScrollFilter 
+                data = {Data}
+                buttonContainerStyle = {styles.buttonContainer}
+                buttonTextStyle = {styles.buttonText}
+                selectedButtonStyle = {styles.selectedItem}
+                buttonSeparatorStyle = {styles.buttonSeparator}
+                crossIconStyle = {styles.crossIcon}
+            />
         </View>
     );
 }
@@ -26,5 +33,23 @@ const styles = StyleSheet.create({
         fontWeight:'800',
         fontSize:30,
         textAlign:"center"
+    },
+    buttonContainer:{
+        borderWidth:0,
+        backgroundColor:"#039fbe"
+    },
+    buttonText:{
+        fontSize:18,
+        color:"#fafafa"
+    },
+    buttonSeparator:{
+        backgroundColor:"#fafafa"
+    },
+    selectedItem:{
+        borderWidth:0,
+        backgroundColor:"#b20238"
+    },
+    crossIcon:{
+        tintColor:"#fafafa",
     }
 })

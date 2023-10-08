@@ -14,17 +14,19 @@ export const DropdownScreen =()=>{
     const [section, setSection] = useState(false);
     const [singleData, setSingleData] = useState({});
     const [multipleData, setMultipleData] = useState(null);
-    const [sectionData, setSectionData] = useState({});
+    const [sectionData, setSectionData] = useState(null);
 
+    console.log(sectionData)
     return(
         <View style={styles.container}>
+            <Text style={styles.headingText}>DROPDOWN</Text>
             <View style={styles.section}>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={()=> setSingle(true)}
                 >
                     <Text style={styles.buttonText}>
-                    {singleData.label? singleData.label:'Select Country'}
+                        {singleData && singleData.label? singleData.label:'Select Country'}
                     </Text>
                     <FontAwesome5 style={styles.icon} name="chevron-down" size={20}/>
                 </TouchableOpacity>
@@ -68,7 +70,9 @@ export const DropdownScreen =()=>{
                     style={styles.button}
                     onPress={()=> setSection(true)}
                 >
-                    <Text style={styles.buttonText}>Select Countries</Text>
+                    <Text style={styles.buttonText}>
+                        {sectionData && sectionData.label? sectionData.label:'Select Country'}
+                    </Text>
                     <FontAwesome5 style={styles.icon} name="chevron-down" size={20}/>
                 </TouchableOpacity>
                 { !section ? null :
@@ -90,6 +94,13 @@ const styles = StyleSheet.create({
         flex:1,
         padding:10,
         backgroundColor:colors.appBgColor
+    },
+    headingText:{
+        padding:10,
+        color:"#393733",
+        fontWeight:'800',
+        fontSize:25,
+        textAlign:"center"
     },
     section:{
         flex:1,
