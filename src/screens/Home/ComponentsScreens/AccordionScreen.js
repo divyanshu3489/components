@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         padding:10,
         color:"#393733",
         fontWeight:'800',
-        fontSize:25,
+        fontSize:30,
         textAlign:"center"
     },
     headerStyle:{
@@ -42,13 +42,15 @@ const styles = StyleSheet.create({
         backgroundColor:"#1868ae"//"#1e847f"
     },
     headerText:{
+        fontSize:25,
+        iconSize:50,
         color:"#fafafa"
     },
     contentContainer:{
         borderColor:0,
         //backgroundColor:"#d9a5b3"
     },
-    /*contentText:{
-        color:"#000000"
-    }*/
+    contentText:{
+        fontSize:20
+    }
 })
