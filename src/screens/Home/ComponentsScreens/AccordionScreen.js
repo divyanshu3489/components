@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         textAlign:"center"
     },
     headerStyle:{
+        minHeight:60,
         borderColor:0,
         backgroundColor:"#1868ae"//"#1e847f"
     },

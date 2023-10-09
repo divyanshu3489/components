@@ -75,7 +75,7 @@ export const DropdownScreen =()=>{
                     onPress={()=> setSection(true)}
                 >
                     <Text style={styles.buttonText}>
-                        {sectionData && sectionData.label? sectionData.label:'Select Country'}
+                        {sectionData && sectionData.label? `${sectionData.title} : ${sectionData.label}`:'Select Country'}
                     </Text>
                     <FontAwesome5 style={styles.icon} name="chevron-down" size={20}/>
                 </TouchableOpacity>
