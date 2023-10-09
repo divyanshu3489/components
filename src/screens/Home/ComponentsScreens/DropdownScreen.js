@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import colors from "../../../appStyles/colorStyle";
-import { primaryFontColor } from "../../../appStyles/fontStyles";
+import { primaryFontColor, secondaryFontColor } from "../../../appStyles/fontStyles";
 import { singleSelection, multipleSelection, sectionList } from "../../../components/Dropdown/dropdownData";
 import FlatDropdown from "../../../components/Dropdown/FlatDropdown";
 import SectionDropdown from "../../../components/Dropdown/SectionDropdown";
@@ -16,11 +16,11 @@ export const DropdownScreen =()=>{
     const [multipleData, setMultipleData] = useState(null);
     const [sectionData, setSectionData] = useState(null);
 
-    console.log(sectionData)
     return(
         <View style={styles.container}>
             <Text style={styles.headingText}>DROPDOWN</Text>
             <View style={styles.section}>
+                <Text style={styles.headingText}>SINGLE SELECTION DROPDOWN</Text>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={()=> setSingle(true)}
@@ -43,29 +43,33 @@ export const DropdownScreen =()=>{
                 }
             </View>
             <View style={styles.section}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={()=> setMultiple(true)}
-                >
-                    <Text style={styles.buttonText}>Select Countries</Text>
-                    <FontAwesome5 style={styles.icon} name="chevron-down" size={20}/>
-                </TouchableOpacity>
-                {multiple ? 
-                    <FlatDropdown
-                        visibleState={multiple}
-                        data={multipleSelection} 
-                        onSelect={setMultipleData} 
-                        selectionType="multiple" 
-                        showSearch={true} 
-                        dropdownHeader="Select Country"
-                        selectionDone={setMultiple}
-                    /> : null
-                }
-                {
-                    multipleData? <Text style={styles.buttonText}>Selected Countries:{multipleData.toString()}</Text> : null
-                }
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Text style={styles.headingText}>MULTIPLE SELECTION DROPDOWN</Text>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={()=> setMultiple(true)}
+                    >
+                        <Text style={styles.buttonText}>Select Countries</Text>
+                        <FontAwesome5 style={styles.icon} name="chevron-down" size={20}/>
+                    </TouchableOpacity>
+                    {multiple ? 
+                        <FlatDropdown
+                            visibleState={multiple}
+                            data={multipleSelection} 
+                            onSelect={setMultipleData} 
+                            selectionType="multiple" 
+                            showSearch={true} 
+                            dropdownHeader="Select Country"
+                            selectionDone={setMultiple}
+                        /> : null
+                    }
+                    {
+                        multipleData? <Text style={[styles.buttonText, {color:primaryFontColor}]}>Selected Countries:{multipleData.toString()}</Text> : null
+                    }
+                </ScrollView>
             </View>
             <View style={styles.section}>
+                <Text style={styles.headingText}>SECTIONAL DROPDOWN</Text>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={()=> setSection(true)}
@@ -109,19 +113,20 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#efefef',
-        height: 40,
-        borderColor:"gray",
-        borderWidth:1,
+        backgroundColor: "#234E70",//'#efefef',
+        height: 60,
+        //borderColor:"gray",
+        //borderWidth:1,
         borderRadius:10
     },
     buttonText: {
         flex: 1,
-        fontSize:14,
+        fontSize:25,
         textAlign: 'center',
-        color:primaryFontColor  
+        color:secondaryFontColor
     },
     icon: {
         marginRight: 10,
+        color:secondaryFontColor
     }
 })
