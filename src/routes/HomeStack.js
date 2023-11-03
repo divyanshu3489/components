@@ -5,6 +5,7 @@ import { SwitchFilterScreen } from "../screens/Home/ComponentsScreens/SwitchFilt
 import { AccordionScreen } from "../screens/Home/ComponentsScreens/AccordionScreen";
 import { DropdownScreen } from "../screens/Home/ComponentsScreens/DropdownScreen";
 import { Home } from "../screens/Home/Home";
+import { LoaderScreen } from "../screens/Home/ComponentsScreens/LoaderScreen";
 
 const HomeStack =()=>{
     const Stack = createStackNavigator();
@@ -33,6 +34,11 @@ const HomeStack =()=>{
                 name="Dropdown" 
                 component={DropdownScreen}
                 options={{headerTitle:'Dropdowns'}}
+            />
+            <Stack.Screen 
+                name="Loader" 
+                component={LoaderScreen}
+                options={{headerTitle:'Loader'}}
             />
         </Stack.Navigator>
     );

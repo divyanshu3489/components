@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View,Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
+import { View,Text, TouchableOpacity, StyleSheet, ScrollView, Image, Animated } from "react-native";
 import crossImg from "../../assets/cross.png";
 
 export const ScrollFilter =(props)=>{
@@ -22,7 +22,18 @@ export const ScrollFilter =(props)=>{
     const filterData =(selected)=> {
         let filtered = Data.filter((value)=> value.name != selected.name);
         setButtonsData(filtered);
-        scrollViewRef.current?.scrollTo({x: 0, animated: true});
+        
+        //scrollViewRef.current?.scrollTo({x: 0, animated: true});
+
+        scrollViewRef.current?.scrollTo(Animated.event(
+            [{nativeEvent: {
+                    contentOffset: {
+                        x: 0
+                    }
+                }
+            }],
+            { useNativeDriver: true }
+        ));
     }
 
     return(
