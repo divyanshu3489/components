@@ -5,9 +5,9 @@ import { ButtonComponent } from "./ButtonComponents";
 
 export const Home =()=>{
     return(
-        <>
+        <View style={styles.container}>
             <Text style={styles.headingText}>COMPONENTS {`>>>>`}</Text>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {/* <View style={styles.container}> */}
                     <ButtonComponent
                         //headerTitle = {'1.Scroll Filter by IMDb'}
@@ -41,13 +41,13 @@ export const Home =()=>{
                     />
                 {/* </View> */}
             </ScrollView>
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        //flex:1,
+        flex:1,
         padding:10,
         backgroundColor:colors.appBgColor
     },
