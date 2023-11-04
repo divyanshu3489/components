@@ -33,7 +33,7 @@ export const CustomLoader =(props)=>{
                 Animated.stagger(400, animations),
                 {iterations: -1},
             ).start();
-        },[visible])
+        })
     }
 
     return(
