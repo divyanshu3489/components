@@ -1,4 +1,4 @@
-export const colors = ['#64EAFE','#8AF0FF','#FEFFB3','#D7FAFE','#EFFDFE'];
+export const loaderColors = ['#64EAFE','#8AF0FF','#FEFFB3','#D7FAFE','#EFFDFE'];
 
 export const loaderSizes = {
     'circle':{
@@ -31,3 +31,10 @@ export const loaderSizes = {
         borderRadius:5
     }
 }
+
+export const loaderTypeDD = [
+    {"label":"Circle : Large", "value":"circle:large"},
+    {"label":"Circle : Small", "value":"circle:small"},
+    {"label":"Square : Large", "value":"square:large"},
+    {"label":"Square : Small", "value":"square:small"}
+];

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, Modal, View, SectionList } from 'react-native'; 
+import { StyleSheet, Text, TouchableOpacity, Animated, View, SectionList } from 'react-native'; 
 import PropTypes from "prop-types";
 
 //Sample array format for dropdown
@@ -39,26 +39,30 @@ const SectionDropdown = (props) => {
     />
   )}
   
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
+  const renderItem = ({ item, section:{title} }) => (
+    <TouchableOpacity 
+      style={styles.item} 
+      onPress={() => {
+        item['title'] = title;
+        onItemPress(item);
+    }}>
       <Text style={styles.meetingTime}>{item.label}</Text>
     </TouchableOpacity>
   );
 
-  const renderDropdown =() => {
+  const RenderDropdown =() => {
     
     return (
-      <Modal visible={visible} transparent={true}>
-        
-        <View style={styles.overlay}>
+      // <Modal visible={visible} transparent={true}>
+      //   <View style={styles.overlay}>
             
-          <View style={[styles.dropdown, customStyles["dropdownStyle"]]}>
-            {
+          <Animated.View style={[styles.dropdown, customStyles["dropdownStyle"]]}>
+            {/*
             !dropdownHeader ?  null:
             <View style={[styles.dropdownHeader, customStyles["headerStyle"]]}>
               <Text style={[styles.dropdownHeaderText, customStyles["headerText"]]}>{dropdownHeader}</Text>
             </View>
-            }
+            */}
             {
               data.length == 0 ?
               <View style={{alignItems:"center", justifyContent:"center", minHeight:200}}> 
@@ -70,16 +74,17 @@ const SectionDropdown = (props) => {
               <SectionList
                 sections={data}
                 renderSectionHeader={({ section }) => (
-                  <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionHeaderText}>{section.title}</Text>
+                  <View style={[styles.sectionHeader, customStyles['sectionTitleStyle']]}>
+                    <Text style={[styles.sectionHeaderText, customStyles['sectionTitleText']]}>{section.title}</Text>
                   </View>
                 )}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                ItemSeparatorComponent={myItemSeparator}
+                // ItemSeparatorComponent={myItemSeparator}
+                showsVerticalScrollIndicator={false}
               />
             }
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={[styles.dropdownButtonView, customStyles["cancelButton"]]}
                 activeOpacity={0.8}
                 onPress={()=> {
@@ -88,15 +93,15 @@ const SectionDropdown = (props) => {
                 }}
               >
                 <Text style={[styles.dropdownButton, customStyles["cancelText"]]}>Cancel</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+              </TouchableOpacity> */}
+          </Animated.View>
+      //   </View>
+      // </Modal>
     );
   };
 
   return(
-    renderDropdown()
+    <RenderDropdown/>
   )
 };
 
@@ -124,7 +129,9 @@ const styles = StyleSheet.create({
   sectionHeader:{
     backgroundColor:"black",
     height:40,
-    justifyContent:"center"
+    justifyContent:"center",
+    borderTopLeftRadius:5,
+    borderTopRightRadius:5
   },
   sectionHeaderText:{
     fontSize:18,
@@ -137,8 +144,9 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     backgroundColor: '#fff',
-    width:250,
-    maxHeight:350,
+    //width:250,
+    //maxHeight:350,
+    marginTop:5,
     borderRadius:5,
   },
   overlay: {
@@ -191,7 +199,9 @@ SectionDropdown.defaultProps = {
     headerText:{},
     cancelButton:{},
     cancelText:{},
-    dropdownStyle:{}
+    dropdownStyle:{},
+    sectionTitleStyle:{},
+    sectionTitleText:{},
   }
 }
 
@@ -206,7 +216,9 @@ SectionDropdown.propTypes = {
     headerText:PropTypes.object,
     cancelButton:PropTypes.object,
     cancelText:PropTypes.object,
-    dropdownStyle:PropTypes.object
+    dropdownStyle:PropTypes.object,
+    sectionTitleStyle:PropTypes.object,
+    sectionTitleText:PropTypes.object
   })
 }
 

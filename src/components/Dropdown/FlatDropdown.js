@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, Modal, View, TextInput } from 'react-native';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, Modal, View, TextInput, Animated, ScrollView } from 'react-native';
 import { primaryFontColor } from '../../appStyles/fontStyles';
 import PropTypes from "prop-types";
 
@@ -41,6 +41,7 @@ const FlatDropdown = (props) => {
   const [itemSelected, setItemSelected] = useState([])
   const [originalLength , setOriginalLength] = useState()
   const [initialized, setInitialized] = useState(false);
+  const [lsData, setLsData] = useState(data);
 
 
   //Initializing data
@@ -69,7 +70,7 @@ const FlatDropdown = (props) => {
       setOriginalLength(multiSelect.length); 
     }
     setInitialized(true);
-  })
+  },[])
 
   const onItemPress = (item) => {
     if(selectionType == "single"){
@@ -175,6 +176,7 @@ const FlatDropdown = (props) => {
     })
   }  
   
+  // const RenderItem = ({item}) =>{  
   const renderItem = ({item}) =>{  
     /* console.log(item)
     //item.selected not available then add it only for multiple selection
@@ -185,9 +187,8 @@ const FlatDropdown = (props) => {
     } */
     //Selected item color
     var Color = item.selected ? "#afeeee": null
-
     return(
-      <TouchableOpacity 
+      <TouchableOpacity
         style={[styles.item, {backgroundColor:Color}]} 
         onPress={() => {
             onItemPress(item)
@@ -198,104 +199,94 @@ const FlatDropdown = (props) => {
     );
   } 
   
-  const renderDropdown = ()=> {
+  const RenderDropdown = ()=> {
     return (
-      <Modal visible={visible} transparent animationType="none">
-          <View style={styles.overlay}>
-            <View style={[styles.dropdown, customStyles["dropdownStyle"]]}>
-            {
-            !dropdownHeader ?  null:
-            <View style={[styles.dropdownHeader, customStyles["headerStyle"]]}>
-              <Text style={[styles.dropdownHeaderText, customStyles["headerText"]]}>{dropdownHeader}</Text>
-              {!subHeaderText ? null: 
-                <Text style={[styles.subHeaderText, customStyles["subHeaderText"]]}>{subHeaderText}</Text>
+      <Animated.View style={[styles.dropdown, customStyles["dropdownStyle"]]}>
+      {
+        listData && listData.length == 0 ? 
+        <View style={{alignItems:"center", justifyContent:"center", minHeight:200}}> 
+          <Text style={{color:"black"}}>Data not available</Text> 
+        </View> 
+          :
+        <FlatList
+          data={listData}
+          renderItem={renderItem}
+          initialNumToRender={10}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      }
+      { !inputBox ? null :
+          <TextInput
+            style={styles.otherInput}
+            placeholder="Other"
+            onChangeText={(value)=> setInputValue(value)}
+            onEndEditing={()=>{
+              if(inputValue){
+                setMultiSelect(multiSelect=>[...multiSelect, inputValue])
+                setItemSelected(itemSelected=>[...itemSelected, inputValue])
               }
-            </View>
-            }
-            { showSearch?
-                <TextInput
-                  style={styles.searchText}        
-                  placeholder="Search"        
-                  onChangeText={(value) => setText(value)}
-                  onChange={listData.length>0 ? searchFilterFunction(text):null}
-                  autoCorrect={false}
-                />  : null 
-            }
+            }}
+          />
+      }
+      { showCancel?
+        <View style={styles.dropdownButtonView}>
+          <TouchableOpacity
+            style={[styles.cancelButton, customStyles["cancelButton"], {borderBottomLeftRadius:5, borderBottomRightRadius: selectionType == "single" ? 5:0}]}
+            activeOpacity={0.8}
+            onPress={()=> {
+              setVisible(false)
+              removeSelection()
+              setMultiSelect([])
+              setItemSelected([])
+              selectionDone(false)
+              setText("")
+            }}
+          >
+            <Text style={[styles.dropdownButton, customStyles["cancelText"]]}>Cancel</Text>
+          </TouchableOpacity>
             {
-              listData && listData.length == 0 ? 
-              <View style={{alignItems:"center", justifyContent:"center", minHeight:200}}> 
-                <Text style={{color:"black"}}>Data not available</Text> 
-              </View> 
-                :
-              <FlatList
-                data={listData}
-                renderItem={renderItem}
-                initialNumToRender={10}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item, index) => index.toString()}
-              />
+              selectionType == "multiple" ?
+              <TouchableOpacity
+                style={[styles.cancelButton, customStyles["cancelButton"], {borderBottomRightRadius:5}]}
+                activeOpacity={0.8}
+                onPress={()=> {
+                  setVisible(false)
+                  onSelect(multiSelect.length === 0 ? "" : multiSelect)
+                  selectionDone(false)
+                  setText("")
+                  setMultiSelect([])
+                  setItemSelected([])
+                }}
+                disabled={ mandatoryField ? (itemSelected.length > 0 || (multiSelect.length < originalLength && multiSelect.length != 0))? false:true: false }    
+              >
+                <Text 
+                style={
+                  [styles.dropdownButton, customStyles["cancelText"], {color: mandatoryField ?  (itemSelected.length > 0 || (multiSelect.length < originalLength && multiSelect.length != 0))? "#ffffff":"#888888" :"#ffffff"}]
+                }>OK</Text>
+              </TouchableOpacity> : null
             }
-            { !inputBox ? null :
-                <TextInput
-                  style={styles.otherInput}
-                  placeholder="Other"
-                  onChangeText={(value)=> setInputValue(value)}
-                  onEndEditing={()=>{
-                    if(inputValue){
-                      setMultiSelect(multiSelect=>[...multiSelect, inputValue])
-                      setItemSelected(itemSelected=>[...itemSelected, inputValue])
-                    }
-                  }}
-                />
-            }
-            { showCancel?
-              <View style={styles.dropdownButtonView}>
-                <TouchableOpacity
-                  style={[styles.cancelButton, customStyles["cancelButton"], {borderBottomLeftRadius:5, borderBottomRightRadius: selectionType == "single" ? 5:0}]}
-                  activeOpacity={0.8}
-                  onPress={()=> {
-                    setVisible(false)
-                    removeSelection()
-                    setMultiSelect([])
-                    setItemSelected([])
-                    selectionDone(false)
-                    setText("")
-                  }}
-                >
-                  <Text style={[styles.dropdownButton, customStyles["cancelText"]]}>Cancel</Text>
-                </TouchableOpacity>
-                  {
-                    selectionType == "multiple" ?
-                    <TouchableOpacity
-                      style={[styles.cancelButton, customStyles["cancelButton"], {borderBottomRightRadius:5}]}
-                      activeOpacity={0.8}
-                      onPress={()=> {
-                        setVisible(false)
-                        onSelect(multiSelect.length === 0 ? "" : multiSelect)
-                        selectionDone(false)
-                        setText("")
-                        setMultiSelect([])
-                        setItemSelected([])
-                        }}
-                      disabled={ mandatoryField ? (itemSelected.length > 0 || (multiSelect.length < originalLength && multiSelect.length != 0))? false:true: false }    
-                    >
-                      <Text 
-                      style={
-                        [styles.dropdownButton, customStyles["cancelText"], {color: mandatoryField ?  (itemSelected.length > 0 || (multiSelect.length < originalLength && multiSelect.length != 0))? "#ffffff":"#888888" :"#ffffff"}]
-                      }>OK</Text>
-                    </TouchableOpacity> : null
-                  }
-              </View> : null
-            }
-            </View>  
-          </View>
-      </Modal>
+        </View> : null
+      }
+      </Animated.View>
     );
   };
 
   //rendering dropdown
   return(
-    renderDropdown()
+    <>
+      { showSearch?
+        <TextInput
+          style={styles.searchText}        
+          placeholder="Search"
+          value={text}
+          onChangeText={(value) =>setText(value)}
+          onChange={listData.length>0 ? searchFilterFunction(text):null}
+          autoCorrect={false}
+        />  : null 
+      }
+      <RenderDropdown/>
+    </>
   )
 };
 
@@ -303,9 +294,11 @@ const FlatDropdown = (props) => {
 const styles = StyleSheet.create({
   dropdown: {
     backgroundColor: '#fff',
-    width:275,
-    maxHeight:340,
-    borderRadius:5, 
+    borderBottomRightRadius:10,
+    borderBottomLeftRadius:10,
+    //width:275,
+    //maxHeight:340,
+    //borderRadius:5, 
   },
   overlay: {
     flex:1,
@@ -315,24 +308,27 @@ const styles = StyleSheet.create({
   },
   item: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 5,
     marginBottom:2
   },
   listItem:{
-    fontSize:14,
+    fontSize:20,
+    textAlign:"center"
   },
   searchText:{
-    fontSize:12,
-    marginLeft:5,
-    marginRight:5,
-    borderColor:"#c8c8c8",
-    borderWidth:2,
-    marginTop:10,
-    marginBottom:10,
-    borderRadius:5,
+    fontSize:18,
+    backgroundColor: '#fff',
+    borderColor:"#807f7f",
+    borderBottomWidth:1,
+    marginTop:5,
+    // borderRadius:10,
+    // borderBottomEndRadius:0,
+    borderTopRightRadius:10,
+    borderTopLeftRadius:10,
     paddingBottom:2,
-    paddingTop:2,
-    paddingLeft:15,
+    paddingTop:3,
+    paddingVertical:25,
+    textAlign:"center",
     textAlignVertical:"center",
     color:primaryFontColor
   },

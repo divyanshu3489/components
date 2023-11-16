@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native"; 
-import colors from "../../../appStyles/colorStyle";
-import { Accordion } from "../../../components/Accordian/Accordion";
-import { data } from "../../../components/Accordian/accordionData";
+import colors from "../../appStyles/colorStyle";
+import { Accordion } from "../../components/Accordian/Accordion";
+import { data } from "../../components/Accordian/accordionData";
 
 export const AccordionScreen =()=>{
     return(

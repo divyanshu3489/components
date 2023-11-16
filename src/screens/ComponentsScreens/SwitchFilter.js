@@ -1,8 +1,8 @@
 import React,{ useState } from "react";
 import { View, StyleSheet, Text } from "react-native"; 
-import colors from "../../../appStyles/colorStyle";
-import { SwitchFilter } from "../../../components/SwitchFilter/SwitchFilter";
-import { switchData } from "../../../components/SwitchFilter/buttonsData";
+import colors from "../../appStyles/colorStyle";
+import { SwitchFilter } from "../../components/SwitchFilter/SwitchFilter";
+import { switchData } from "../../components/SwitchFilter/buttonsData";
 
 export const SwitchFilterScreen =()=>{
 

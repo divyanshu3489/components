@@ -36,37 +36,37 @@ export const multipleSelection = [
 export const sectionList = [
     {   'title':'Asia', 
         'data':[
-            {'title':'Asia', "label":"India", "value":"india"},
-            {'title':'Asia', "label":"Pakistan", "value":"pakistan"},
-            {'title':'Asia', "label":"Bangladesh", "value":"bangladesh"},
-            {'title':'Asia', "label":"Sri Lanka", "value":"srilanka"},
-            {'title':'Asia', "label":"Russia", "value":"russia"},
-            {'title':'Asia', "label":"China", "value":"china"}
+            {"label":"India", "value":"india"},
+            {"label":"Pakistan", "value":"pakistan"},
+            {"label":"Bangladesh", "value":"bangladesh"},
+            {"label":"Sri Lanka", "value":"srilanka"},
+            {"label":"Russia", "value":"russia"},
+            {"label":"China", "value":"china"}
         ]
     },
     {
         'title':'Europe',
         'data':[
-            {'title':'Europe', "label":"France", "value":"france"},
-            {'title':'Europe', "label":"Italy", "value":"italy"},
-            {'title':'Europe', "label":"Germany", "value":"germany"},
-            {'title':'Europe', "label":"England", "value":"england"}
+            {"label":"France", "value":"france"},
+            {"label":"Italy", "value":"italy"},
+            {"label":"Germany", "value":"germany"},
+            {"label":"England", "value":"england"}
         ]
     },
     {
         'title':'North America',
         'data':[
-            {'title':'North America', "label":"United States of America", "value":"usa"},
-            {'title':'North America', "label":"Canada", "value":"canada"},
-            {'title':'North America', "label":"Mexico", "value":"mexico"}
+            {"label":"United States of America", "value":"usa"},
+            {"label":"Canada", "value":"canada"},
+            {"label":"Mexico", "value":"mexico"}
         ]
     },
     {
         'title':'Oceania',
         'data':[
-            {'title':'Oceania', "label":"Australia", "value":"australia"},
-            {'title':'Oceania', "label":"New Zealand", "value":"newzealand"},
-            {'title':'Oceania', "label":"Papua New Guinea", "value":"png"}
+            {"label":"Australia", "value":"australia"},
+            {"label":"New Zealand", "value":"newzealand"},
+            {"label":"Papua New Guinea", "value":"png"}
         ]
     }
 ];

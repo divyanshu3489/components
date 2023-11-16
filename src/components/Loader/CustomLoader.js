@@ -1,10 +1,11 @@
 import React,{ useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated, Easing } from "react-native";
-import { colors, loaderSizes } from "./colors";
+import { loaderSizes } from "./colors";
 
 export const CustomLoader =(props)=>{
     
     //Props
+    const colors = props.colors;
     const loading = props.loading;
     const loaderShape = props.loaderShape;
     const size = props.size;
@@ -34,28 +35,27 @@ export const CustomLoader =(props)=>{
                 {iterations: -1},
             ).start();
         })
+    
+        return(
+            <View style={styles.container}>
+                {
+                    colors.map((color, index)=>{
+                        const opacity = animatedValues[index];
+                        return(
+                            <Animated.View 
+                                key={index} 
+                                style={[
+                                    styles.loader,
+                                    loaderShape && loaderShape != 'default' ? loaderSizes[loaderShape][size] : loaderSizes['default'],
+                                    {backgroundColor:color, opacity:opacity}
+                                ]}
+                            />
+                        )
+                    })
+                }
+            </View>
+        );
     }
-
-    return(
-        loading ?
-        <View style={styles.container}>
-            {
-                colors.map((color, index)=>{
-                    const opacity = animatedValues[index];
-                    return(
-                        <Animated.View 
-                            key={index} 
-                            style={[
-                                styles.loader,
-                                loaderShape && loaderShape != 'default' ? loaderSizes[loaderShape][size] : loaderSizes['default'],
-                                {backgroundColor:color, opacity:opacity}
-                            ]}
-                        />
-                    )
-                })
-            }
-        </View> : null
-    );
 };
 
 const styles = StyleSheet.create({

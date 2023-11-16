@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native"; 
-import colors from "../../../appStyles/colorStyle";
-import { ScrollFilter } from "../../../components/ScrollFilter/ScrollFilter";
-import { Data } from "../../../components/ScrollFilter/buttonsData";
+import colors from "../../appStyles/colorStyle";
+import { ScrollFilter } from "../../components/ScrollFilter/ScrollFilter";
+import { Data } from "../../components/ScrollFilter/buttonsData";
 
 export const ScrollFilterScreen =()=>{
     return(
