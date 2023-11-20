@@ -6,6 +6,7 @@ import { AccordionScreen } from "../screens/ComponentsScreens/AccordionScreen";
 import DropdownStack from "./DropdownStack";
 import { Home } from "../screens/Home/Home";
 import { LoaderScreen } from "../screens/ComponentsScreens/LoaderScreen";
+import { EmojisScreen } from "../screens/ComponentsScreens/EmojisScreen";
 
 const HomeStack =()=>{
     const Stack = createStackNavigator();
@@ -39,6 +40,11 @@ const HomeStack =()=>{
                 name="Loader" 
                 component={LoaderScreen}
                 options={{headerTitle:'Loader'}}
+            />
+            <Stack.Screen 
+                name="Emoji" 
+                component={EmojisScreen}
+                options={{headerTitle:'Emojis'}}
             />
         </Stack.Navigator>
     );

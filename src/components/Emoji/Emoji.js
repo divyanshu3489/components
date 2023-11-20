@@ -7,10 +7,11 @@ export const EmojiText = (props) => {
 
     //Props
     const emojiStyle = props.emojiStyle;
+    const size = props.size;
     const name = props.name;
 
   return (
-    <Text style={[emojiStyle,{fontFamily:'System'}]}>
+    <Text style={[emojiStyle,{fontFamily:'System', fontSize:size}]}>
       {Mapper[name]}
     </Text>
   );
