@@ -45,6 +45,18 @@ export const Home =()=>{
                         navigateTo = {'Emoji'}
                         buttonStyles = {{'viewStyle':{backgroundColor:'#12a4d9'}, 'textStyle':{color:'#fafafa'}}}
                     />
+                    <ButtonComponent
+                        //headerTitle = {'4.Dropdowns'}
+                        buttonText = {'Photo Slider'}
+                        navigateTo = {'Slider'}
+                        buttonStyles = {{'viewStyle':{backgroundColor:'#322e2f'}, 'textStyle':{color:'#fafafa'}}}
+                    />
+                    <ButtonComponent
+                        //headerTitle = {'4.Dropdowns'}
+                        buttonText = {'Coupons'}
+                        navigateTo = {'Coupons'}
+                        buttonStyles = {{'viewStyle':{backgroundColor:'#e2d810'}, 'textStyle':{color:'#fafafa'}}}
+                    />
                 {/* </View> */}
             </ScrollView>
         </View>
