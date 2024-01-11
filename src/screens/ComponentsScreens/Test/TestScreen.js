@@ -1,12 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { Form } from "../../../components/Form/Forms";
 
-export const CouponScreen=()=>{
-    
+export const TestScreen=()=>{
     return(
-        <View style={styles.container}>
-            <Text>Coupon Generate</Text>
-        </View>
+        <Form/>
     )
 }
 

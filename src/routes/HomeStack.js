@@ -8,7 +8,7 @@ import { AccordionScreen } from "../screens/ComponentsScreens/AccordionScreen";
 import { LoaderScreen } from "../screens/ComponentsScreens/LoaderScreen";
 import { EmojisScreen } from "../screens/ComponentsScreens/EmojisScreen";
 import { SliderScreen } from "../screens/ComponentsScreens/PhotoSlider/SliderScreen";
-import { CouponScreen } from "../screens/ComponentsScreens/Coupons/CouponScreen";
+import { TestScreen } from "../screens/ComponentsScreens/Test/TestScreen";
 
 const HomeStack =()=>{
     const Stack = createStackNavigator();
@@ -54,9 +54,9 @@ const HomeStack =()=>{
                 options={{headerTitle:'Photo Slider'}}
             />
             <Stack.Screen 
-                name="Coupons" 
-                component={CouponScreen}
-                options={{headerTitle:'Coupons'}}
+                name="Form" 
+                component={TestScreen}
+                options={{headerTitle:'Custom Input Field'}}
             />
         </Stack.Navigator>
     );

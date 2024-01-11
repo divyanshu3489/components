@@ -1,5 +1,5 @@
 import React,{useEffect, useRef} from "react";
-import { View,FlatList, Image, StyleSheet, Animated, Dimensions } from "react-native";
+import { View, FlatList, Image, StyleSheet, Animated } from "react-native";
 import { sliderData } from "./sliderData";
 import { screenWidth } from "../../../appStyles/colorStyle";
 
@@ -8,6 +8,8 @@ export const SliderScreen=()=>{
     const scrollX = new Animated.Value(0);
     let position = Animated.divide(scrollX, screenWidth);
 
+
+    console.log(screenWidth);
     //Automatic scrolling 
     const infiniteScroll=()=>{
         const numberOfData = sliderData.length;
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
     img:{
         //flex:1,
         width:screenWidth,
-        height:250
+        height:250,
+        backgroundColor:'#123456'
     }
 });
