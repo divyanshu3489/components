@@ -53,8 +53,8 @@ export const Home =()=>{
                     />
                     <ButtonComponent
                         //headerTitle = {'4.Dropdowns'}
-                        buttonText = {'Coupons'}
-                        navigateTo = {'Coupons'}
+                        buttonText = {'Custom Form'}
+                        navigateTo = {'Form'}
                         buttonStyles = {{'viewStyle':{backgroundColor:'#e2d810'}, 'textStyle':{color:'#fafafa'}}}
                     />
                 {/* </View> */}
