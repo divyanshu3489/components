@@ -3,21 +3,22 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Animated } from "r
 import { screenWidth } from "../../appStyles/colorStyle";
 import { Validations } from "./Validations";
 
-export const CustomInput =({ label })=>{
-
+export const CustomInput =({ label, validation })=>{
+    //Local States
     const [input, setInput] = useState('');
     const [startEdit, setStartEdit] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(false);
 
-    //Position 
+    //Label Position 
     const position = useRef(new Animated.Value(0)).current;
 
-    //Opacity
+    //Label Opacity
     const opacity = useRef(new Animated.Value(0)).current;
 
     //Validating input
-    const handleInput=()=>{
-        const errorMsg = Validations.validate(input, "empty");
-        console.log(errorMsg);
+    const handleInput=(valid)=>{
+        const errorMsg = Validations.validate(input,valid);
+        setErrorMsg(errorMsg);
     }
 
     //Fade IN
@@ -53,11 +54,10 @@ export const CustomInput =({ label })=>{
     return(
         <View style={styles.container}>
             <View>
-                {/* {!startEdit? null : */}
-                    <Animated.Text style={[styles.label, {transform:[{translateY: position}], opacity:opacity}]}>{label ? label : 'Specify Label'}</Animated.Text>
-                {/* } */}
+                <Animated.Text style={[styles.label, {transform:[{translateY: position}], opacity:opacity}]}>{label ? label : 'Specify Label'}</Animated.Text>
                 <TextInput
                     style={styles.input}
+                    value={input}
                     onChangeText={(value)=> setInput(value)}
                     placeholder={startEdit? '':label ? label : 'Specify Label'}
                     onFocus={
@@ -67,11 +67,15 @@ export const CustomInput =({ label })=>{
                         }
                     }
                     onEndEditing={()=>{
-                            fadeOut();
-                            setStartEdit(false)
+                            if(input == ''){
+                                fadeOut();
+                                setStartEdit(false)
+                            }
+                            handleInput(validation);
                         }
                     }
                 />
+                {!errorMsg.error ? null : <Text style={styles.errorText}>{errorMsg.errorCode}</Text>}
             </View>
         </View>
     );
@@ -79,7 +83,7 @@ export const CustomInput =({ label })=>{
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        flexGrow:1,
         alignItems:"center",
         justifyContent:"center",
         backgroundColor:'#ffffff'
@@ -102,5 +106,10 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:15,
         borderColor:"#000000"
+    },
+    errorText:{
+        fontSize:16,
+        paddingHorizontal:5,
+        color:'#D30707'
     }
 })

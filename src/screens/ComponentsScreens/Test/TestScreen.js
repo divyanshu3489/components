@@ -1,26 +1,28 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import { CustomInput } from "../../../components/Input/CustomInput";
 
 export const TestScreen=()=>{
     return(
-        <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <CustomInput label="First Name"/>
-                <CustomInput label="Last Name"/>
-                <CustomInput label="City"/>
-                <CustomInput label="Country"/>
-                <CustomInput label="Mobile"/>
+        // <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.formContainer}>
+                    <CustomInput label="First Name" validation="empty"/>
+                    <CustomInput label="Last Name" validation="empty"/>
+                    <CustomInput label="City" validation="empty"/>
+                    <CustomInput label="Country" validation="empty"/>
+                    <CustomInput label="Mobile" validation="empty"/>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                        style={styles.submitButton}
+                        // onPress={handleInput}
+                    >
+                        <Text style={styles.buttonText}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity 
-                    style={styles.submitButton}
-                    // onPress={handleInput}
-                >
-                    <Text style={styles.buttonText}>Submit</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        // </ScrollView>
     )
 }
 
